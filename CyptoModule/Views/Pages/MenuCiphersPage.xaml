@@ -34,6 +34,7 @@
             <Button Content="Шифр Атбаш"/>
             <Button Content="Квадрат Полибия"/>
             <Button Content="Диск Альберти"/>
+            <Button Content="Шифр Плейфера"/>
 
         </StackPanel>
         
@@ -46,6 +47,7 @@
             <Button Content="Шифр Скитала"/>
             <Button Content="Шифр Кардано"/>
             <Button Content="Шифр Гронсфельда"/>
+            <Button Content="Криптосистема Хилла"/>
 
         </StackPanel>
         
@@ -58,6 +60,7 @@
             <Button HorizontalAlignment="Left" Content="Шифр Цезаря"/>
             <Button Content="Шифр Ришелье"/>
             <Button Content="Шифр Виженера"/>
+            <Button Content="Шифр Вернама"/>
 
         </StackPanel>
     </Grid>

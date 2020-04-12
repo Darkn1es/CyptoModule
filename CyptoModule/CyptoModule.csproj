@@ -77,6 +77,7 @@
     <Compile Include="Models\Ciphers\Caesar.cs" />
     <Compile Include="Models\Ciphers\Cardan.cs" />
     <Compile Include="Models\Ciphers\Gronsfeld.cs" />
+    <Compile Include="Models\Ciphers\Playfair.cs" />
     <Compile Include="Models\Ciphers\Polybius.cs" />
     <Compile Include="Models\Ciphers\Richelieu.cs" />
     <Compile Include="Models\Ciphers\Scytale.cs" />

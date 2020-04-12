@@ -162,6 +162,7 @@ namespace CyptoModule.ViewModels
             _ciphers.Add(new Alberti());
             _ciphers.Add(new Gronsfeld());
             _ciphers.Add(new Vigenere());
+            _ciphers.Add(new Playfair());
             #endregion
 
             Ciphers = new ReadOnlyObservableCollection<CipherAbstract>(_ciphers);
