@@ -1,0 +1,64 @@
+﻿<Page x:Class="CyptoModule.Views.Pages.MenuCiphersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CyptoModule.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MenuCiphersPage">
+
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style x:Key="CustomStyle" TargetType="Button">
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Width" Value="140"/>
+                <Setter Property="Margin" Value="0,10,0,10"/>
+                <Setter Property="Command" Value="{Binding ChangeCipherCommand}"/>
+                <Setter Property="CommandParameter" Value="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+            </Style>
+        </Grid.Resources>
+        
+        
+        <StackPanel Grid.Column="0" MinWidth="240">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource CustomStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Шифр Атбаш"/>
+            <Button Content="Квадрат Полибия"/>
+            <Button Content="Диск Альберти"/>
+
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" MinWidth="240">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource CustomStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Шифр Скитала"/>
+            <Button Content="Шифр Кардано"/>
+            <Button Content="Шифр Гронсфельда"/>
+
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" MinWidth="240">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource CustomStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button HorizontalAlignment="Left" Content="Шифр Цезаря"/>
+            <Button Content="Шифр Ришелье"/>
+            <Button Content="Шифр Виженера"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
