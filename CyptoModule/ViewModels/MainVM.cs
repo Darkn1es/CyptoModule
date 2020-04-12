@@ -163,6 +163,8 @@ namespace CyptoModule.ViewModels
             _ciphers.Add(new Gronsfeld());
             _ciphers.Add(new Vigenere());
             _ciphers.Add(new Playfair());
+            _ciphers.Add(new Hill());
+            _ciphers.Add(new Vernam());
             #endregion
 
             Ciphers = new ReadOnlyObservableCollection<CipherAbstract>(_ciphers);
