@@ -85,6 +85,7 @@
     <Compile Include="Models\Ciphers\Vernam.cs" />
     <Compile Include="Models\Ciphers\Vigenere.cs" />
     <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\Auxiliary\Matrix.cs" />
     <Compile Include="Models\Interfaces\CipherAbstract.cs" />
     <Compile Include="Models\Interfaces\ICipher.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
