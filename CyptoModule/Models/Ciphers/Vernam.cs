@@ -37,13 +37,14 @@ namespace CyptoModule.Models.Ciphers
             {
                 char lowerSymb = char.ToLower(symb);
 
-                if (!keyIterator.MoveNext())
-                {
-                    keyIterator = keyInt.GetEnumerator();
-                    keyIterator.MoveNext();
-                }
                 if (_alphabet.Contains(lowerSymb))
                 {
+
+                    if (!keyIterator.MoveNext())
+                    {
+                        keyIterator = keyInt.GetEnumerator();
+                        keyIterator.MoveNext();
+                    }
                     int index = _alphabet.IndexOf(lowerSymb);
                     char tempChar = _alphabet[keyIterator.Current ^ index];
                     result += char.IsUpper(symb) ? char.ToUpper(tempChar): tempChar;
