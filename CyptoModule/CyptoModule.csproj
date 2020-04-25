@@ -84,6 +84,7 @@
     <Compile Include="Models\Ciphers\Scytale.cs" />
     <Compile Include="Models\Ciphers\Vernam.cs" />
     <Compile Include="Models\Ciphers\Vigenere.cs" />
+    <Compile Include="Models\Ciphers\XORcipher.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Auxiliary\Matrix.cs" />
     <Compile Include="Models\Interfaces\CipherAbstract.cs" />

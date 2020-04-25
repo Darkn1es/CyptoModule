@@ -97,7 +97,7 @@
                                 <Style.Resources>
                                     <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Top" Stretch="None">
                                         <VisualBrush.Visual>
-                                            <Label Content="Размер" Foreground="Gray" />
+                                            <Label Content="Значение" Foreground="Gray" />
                                         </VisualBrush.Visual>
                                     </VisualBrush>
                                 </Style.Resources>

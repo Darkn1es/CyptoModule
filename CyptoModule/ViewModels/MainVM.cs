@@ -165,6 +165,7 @@ namespace CyptoModule.ViewModels
             _ciphers.Add(new Playfair());
             _ciphers.Add(new Hill());
             _ciphers.Add(new Vernam());
+            _ciphers.Add(new XORcipher());
             #endregion
 
             Ciphers = new ReadOnlyObservableCollection<CipherAbstract>(_ciphers);
@@ -311,7 +312,8 @@ namespace CyptoModule.ViewModels
             OutputText = "";
             ChosenChipher = CurrentCipher.CipherName;
 
-            if (CurrentCipher.CipherName == "Шифр Кардано")
+            if ((CurrentCipher.CipherName == "Шифр Кардано") ||
+                (CurrentCipher.CipherName == "Гаммирование"))
             {
                 CurrentPageContent = _cardanoPage;
             }

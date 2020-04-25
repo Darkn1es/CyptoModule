@@ -35,7 +35,7 @@
             <Button Content="Квадрат Полибия"/>
             <Button Content="Диск Альберти"/>
             <Button Content="Шифр Плейфера"/>
-
+            <Button Content="Гаммирование"/>
         </StackPanel>
         
         <StackPanel Grid.Column="1" MinWidth="240">

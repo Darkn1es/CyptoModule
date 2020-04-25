@@ -23,6 +23,7 @@ namespace CyptoModule.Models.Ciphers
 
         public override string Encrypt(string text, string key = null)
         {
+            key = key.ToLower();
             validate(key);
             string result = "";
             List<int> keyInt = new List<int>();
