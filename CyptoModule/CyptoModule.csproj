@@ -99,6 +99,7 @@
     <Compile Include="Models\Interfaces\ICipher.cs" />
     <Compile Include="ViewModels\FreqAnalysisVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="Views\Converters\InverseBooleanConverter.cs" />
     <Compile Include="Views\Pages\CardanPage.xaml.cs">
       <DependentUpon>CardanPage.xaml</DependentUpon>
     </Compile>

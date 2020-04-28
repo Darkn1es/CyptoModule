@@ -5,11 +5,8 @@ using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CyptoModule.ViewModels
 {
@@ -17,17 +14,57 @@ namespace CyptoModule.ViewModels
     {
         private FreqAnalysis _freqAnalysis;
         private string _text = "";
-
-        private ObservableCollection<KeyPairClass> _replaceRule = new ObservableCollection<KeyPairClass>();
-
-        public ObservableCollection<KeyPairClass> ReplaceRule 
-        { 
-            get => _replaceRule;
-            set 
+        private string _language = "Русский";
+        public string Language
+        {
+            get => _language;
+            set
             {
-                _replaceRule = value;
+                _language = value;
+                switch (_language)
+                {
+                    case "Русский":
+                        _freqAnalysis.ChangeLanguage(FreqAnalysis.Language.Russian);
+                        break;
+                    case "English":
+                        _freqAnalysis.ChangeLanguage(FreqAnalysis.Language.English);
+                        break;
+                    default:
+                        break;
+                }
+                updateHistogram();
+                RaisePropertyChanged(nameof(Language));
             }
         }
+
+        private bool _isFixed = false;
+        public bool IsFixed
+        {
+            get => _isFixed;
+            set
+            {
+                _isFixed = value;
+                if (_isFixed == true)
+                {
+                    _freqAnalysis.Text = Text;
+
+                    /*Histogram[0].Values.Clear();
+                    Histogram[1].Values.Clear();
+
+                    foreach (var key in _freqAnalysis.CurrentFreq.Keys)
+                    {
+                        Histogram[0].Values.Add(_freqAnalysis.CurrentFreq[key]);
+                        string replacedKey = _freqAnalysis.ReplaceRule[key];
+                        Histogram[1].Values.Add(_freqAnalysis.CurrentAlphabet[replacedKey]);
+                    }*/
+                    updateHistogram();
+                }
+
+                RaisePropertyChanged(nameof(IsFixed));
+            }
+        }
+
+        public ObservableCollection<KeyPairClass> ReplaceRule { get; set; } = new ObservableCollection<KeyPairClass>();
 
         public FreqAnalysisVM()
         {
@@ -56,7 +93,7 @@ namespace CyptoModule.ViewModels
 
 
 
-                    return _freqAnalysis.CurrentAlphabet[replacedLetter].ToString("N") + " - " + replacedLetter;
+                    return _freqAnalysis.CurrentAlphabet[replacedLetter].ToString("N") + "% - " + replacedLetter;
                 }
             }); 
             //also adding values updates and animates the chart automatically
@@ -64,21 +101,7 @@ namespace CyptoModule.ViewModels
             Labels = _freqAnalysis.CurrentAlphabet.Keys.ToArray();
             Formatter = value => value.ToString("N") + "%";
 
-            TestCommand = new DelegateCommand(() =>
-            {
-                _freqAnalysis.Text = Text;
-                // IEnumerable<double> tempCollect = _freqAnalysis.CurrentFreq.Values.ToArray();
 
-                Histogram[0].Values.Clear();
-                Histogram[1].Values.Clear();
-
-                foreach (var key in _freqAnalysis.CurrentFreq.Keys)
-                {
-                    Histogram[0].Values.Add(_freqAnalysis.CurrentFreq[key]);
-                    string replacedKey = _freqAnalysis.ReplaceRule[key];
-                    Histogram[1].Values.Add(_freqAnalysis.CurrentAlphabet[replacedKey]);
-                }
-            });
 
             OptimizeCommand = new DelegateCommand(() =>
             {
@@ -122,6 +145,10 @@ namespace CyptoModule.ViewModels
         private void Item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var a = sender as KeyPairClass;
+            if ((a?.Value == null) || (a?.Key == null))
+            {
+                return;
+            }
             var newKP = _freqAnalysis.ApplyRule(a.Key, a.Value);
             var index = ReplaceRule.IndexOf( ReplaceRule.First(t => t.Key == newKP.Key));
             ReplaceRule.RemoveAt(index);
@@ -159,6 +186,29 @@ namespace CyptoModule.ViewModels
 
         public DelegateCommand TestCommand { get; }
         public DelegateCommand OptimizeCommand { get; }
+
+        private void updateHistogram()
+        {
+            Labels = _freqAnalysis.CurrentAlphabet.Keys.ToArray();
+            RaisePropertyChanged(nameof(Labels));
+            ReplaceRule.Clear();
+            foreach (var item in _freqAnalysis.ReplaceRule)
+            {
+                ReplaceRule.Add(new KeyPairClass(item.Key, item.Value));
+            }
+
+            Histogram[0].Values.Clear();
+            Histogram[1].Values.Clear();
+
+            foreach (var key in _freqAnalysis.CurrentFreq.Keys)
+            {
+                Histogram[0].Values.Add(_freqAnalysis.CurrentFreq[key]);
+                string replacedKey = _freqAnalysis.ReplaceRule[key];
+                Histogram[1].Values.Add(_freqAnalysis.CurrentAlphabet[replacedKey]);
+            }
+
+
+        }
 
     }
 }

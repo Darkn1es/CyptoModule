@@ -59,6 +59,21 @@ namespace CyptoModule.Models
             initArrays();
         }
 
+        public void ChangeLanguage(Language language)
+        {
+            switch (language)
+            {
+                case Language.Russian:
+                    CurrentAlphabet = _rusAlphabet;
+                    break;
+                case Language.English:
+                    CurrentAlphabet = _engAlphabet;
+                    break;
+                default:
+                    break;
+            }
+            initArrays();
+        }
 
         public KeyPairClass ApplyRule(string key, string newValue)
         {
@@ -151,6 +166,11 @@ namespace CyptoModule.Models
             }
         }
 
+        public enum Language
+        {
+            Russian,
+            English
+        }
 
     }
 }

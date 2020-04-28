@@ -8,8 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       xmlns:viewmodels="clr-namespace:CyptoModule.ViewModels"
-
-      Title="FreqAnalysisPage">
+      xmlns:converters="clr-namespace:CyptoModule.Views.Converters"
+    Title="FreqAnalysisPage">
+    <Page.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Page.Resources>
     <Page.DataContext>
         <viewmodels:FreqAnalysisVM/>
     </Page.DataContext>
@@ -23,7 +26,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
-            <TextBox TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,15"/>
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,15" IsReadOnly="{Binding IsFixed, UpdateSourceTrigger=PropertyChanged}"/>
 
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">
@@ -42,23 +45,29 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Command="{Binding TestCommand}" Content="TEST"/>
-            <Button Command="{Binding OptimizeCommand}" Content="SORT"/>
-
+            <CheckBox Content="Зафиксировать текст для анализа" IsChecked="{Binding IsFixed}"/>
+            <!--<Button Command="{Binding TestCommand}" Content="TEST"/>-->
+            <Button Command="{Binding OptimizeCommand}" Content="Автоподбор по частотам" IsEnabled="{Binding IsFixed}" Margin="0,15,0,5"/>
+            <Label Content="Выберете язык" HorizontalAlignment="Center"/>
+            <ComboBox SelectedValue="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content" IsEnabled="{Binding Path=IsFixed, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBooleanConverter}}">
+                <ComboBoxItem Content="Русский"/>
+                <ComboBoxItem Content="English"/>
+            </ComboBox>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <ItemsControl ItemsSource="{Binding ReplaceRule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
+            <ItemsControl ItemsSource="{Binding ReplaceRule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsFixed}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel/>
+                        <UniformGrid Columns="7"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
-                            <Label Content="{Binding Path=Key}"/>
-                            <Label Content=" - "/>
-                            <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Labels}" SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label Content="{Binding Path=Key}" MaxHeight="25" MaxWidth="40"/>
+                            <Label Content=" - " MaxHeight="25" MaxWidth="40"/>
+                            <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.Labels}" SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      MaxHeight="25" MaxWidth="40"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
