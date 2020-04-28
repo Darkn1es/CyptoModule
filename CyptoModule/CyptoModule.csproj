@@ -38,6 +38,12 @@
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -72,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Auxiliary\KeyPairClass.cs" />
     <Compile Include="Models\Ciphers\Alberti.cs" />
     <Compile Include="Models\Ciphers\Atbash.cs" />
     <Compile Include="Models\Ciphers\Caesar.cs" />
@@ -85,13 +92,18 @@
     <Compile Include="Models\Ciphers\Vernam.cs" />
     <Compile Include="Models\Ciphers\Vigenere.cs" />
     <Compile Include="Models\Ciphers\XORcipher.cs" />
+    <Compile Include="Models\FreqAnalysis.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Auxiliary\Matrix.cs" />
     <Compile Include="Models\Interfaces\CipherAbstract.cs" />
     <Compile Include="Models\Interfaces\ICipher.cs" />
+    <Compile Include="ViewModels\FreqAnalysisVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="Views\Pages\CardanPage.xaml.cs">
       <DependentUpon>CardanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\FreqAnalysisPage.xaml.cs">
+      <DependentUpon>FreqAnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\KeyTextPage.xaml.cs">
       <DependentUpon>KeyTextPage.xaml</DependentUpon>
@@ -113,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Pages\CardanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\FreqAnalysisPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

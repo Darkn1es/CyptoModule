@@ -48,6 +48,8 @@
             <Button Content="Шифр Кардано"/>
             <Button Content="Шифр Гронсфельда"/>
             <Button Content="Криптосистема Хилла"/>
+            <Button Content="Частотный криптоанализ"/>
+
 
         </StackPanel>
         

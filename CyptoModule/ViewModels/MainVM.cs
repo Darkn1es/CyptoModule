@@ -51,6 +51,7 @@ namespace CyptoModule.ViewModels
 
         private Page _keyTextPage;
         private Page _cardanoPage;
+        private Page _freqPage;
 
         private Page _menuChiphersPage;
 
@@ -175,6 +176,7 @@ namespace CyptoModule.ViewModels
 
             _keyTextPage = new Views.Pages.KeyTextPage();
             _cardanoPage = new Views.Pages.CardanPage();
+            _freqPage = new Views.Pages.FreqAnalysisPage();
             _menuChiphersPage = new Views.Pages.MenuCiphersPage();
 
             _keyTextPage.DataContext = this;
@@ -248,14 +250,21 @@ namespace CyptoModule.ViewModels
             {
                 try
                 {
+                    bool chosen = false;
                     foreach (var cipher in Ciphers)
                     {
                         if (cipher.CipherName == cipherName)
                         {
                             CurrentCipher = cipher;
+                            chosen = true;
                             break;
                         }
                     }
+                    if (!chosen)
+                    {
+                        UpdateWindow(cipherName);
+                    }
+
                 }
                 catch (Exception error)
                 {
@@ -323,5 +332,21 @@ namespace CyptoModule.ViewModels
             }
 
         }
+
+        private void UpdateWindow(string pageName)
+        {
+            IsVisibleKeyBox = false;
+            KeyText = "";
+            InputText = "";
+            OutputText = "";
+            ChosenChipher = pageName;
+
+            if (pageName == "Частотный криптоанализ")
+            {
+                CurrentPageContent = _freqPage;
+            }
+
+        }
+
     }
 }
