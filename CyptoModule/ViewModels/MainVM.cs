@@ -276,14 +276,30 @@ namespace CyptoModule.ViewModels
             {
                 try
                 {
-                    if (OutputText == "")
+                    string outText = "";
+                    if (ChosenChipher == "Частотный криптоанализ")
                     {
-                        throw new Exception("Нет данных для сохранения");
+                        FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
+
+                        if (freqAnalysisVM.Text == "")
+                        {
+                            throw new Exception("Нет данных для сохранения");
+                        }
+                        outText = freqAnalysisVM.Text;
                     }
+                    else
+                    {
+                        if (OutputText == "")
+                        {
+                            throw new Exception("Нет данных для сохранения");
+                        }
+                        outText = OutputText;
+                    }
+
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     if (saveFileDialog.ShowDialog() == true)
                     {
-                        File.WriteAllText(saveFileDialog.FileName, OutputText);
+                        File.WriteAllText(saveFileDialog.FileName, outText);
                         MessageBox.Show("Результат успешно сохранен в файл");
                     }
                 }
@@ -300,7 +316,22 @@ namespace CyptoModule.ViewModels
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     if (openFileDialog.ShowDialog() == true)
                     {
-                        InputText = File.ReadAllText(openFileDialog.FileName);
+                        if (ChosenChipher == "Частотный криптоанализ")
+                        {
+                            FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
+                            if (freqAnalysisVM.IsFixed == false)
+                            {
+                                freqAnalysisVM.Text = File.ReadAllText(openFileDialog.FileName);
+                            }
+                            else
+                            {
+                                throw new Exception("Нельзя загрузить текст, пока ведется анализ");
+                            }
+                        }
+                        else
+                        {
+                            InputText = File.ReadAllText(openFileDialog.FileName);
+                        }
                     }
                 }
                 catch (Exception error)
