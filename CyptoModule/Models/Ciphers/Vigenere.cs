@@ -50,13 +50,19 @@ namespace CyptoModule.Models.Ciphers
             foreach (var symb in ciphertext)
             {
                 char lowerSymb = char.ToLower(symb);
-
-                if (!keyIterator.MoveNext())
+                if (alphabet.Contains(lowerSymb))
                 {
-                    keyIterator = keyInt.GetEnumerator();
-                    keyIterator.MoveNext();
+                    if (!keyIterator.MoveNext())
+                    {
+                        keyIterator = keyInt.GetEnumerator();
+                        keyIterator.MoveNext();
+                    }
+                    text += ShiftSymb(symb, -1 * keyIterator.Current);
                 }
-                text += alphabet.Contains(lowerSymb) ? ShiftSymb(symb, -1 * keyIterator.Current) : symb;
+                else
+                {
+                    text += symb;
+                }
             }
             
             return text;

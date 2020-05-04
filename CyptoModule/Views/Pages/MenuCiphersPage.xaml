@@ -63,7 +63,9 @@
             <Button Content="Шифр Ришелье"/>
             <Button Content="Шифр Виженера"/>
             <Button Content="Шифр Вернама"/>
+            <Button Content="Криптоанализ полиалфавитных шифров"/>
 
+            
         </StackPanel>
     </Grid>
 </Page>

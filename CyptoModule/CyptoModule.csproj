@@ -97,8 +97,13 @@
     <Compile Include="Models\Auxiliary\Matrix.cs" />
     <Compile Include="Models\Interfaces\CipherAbstract.cs" />
     <Compile Include="Models\Interfaces\ICipher.cs" />
+    <Compile Include="Models\Interfaces\PolyAnalysisAbstract.cs" />
+    <Compile Include="Models\Poly\Autocorrelation.cs" />
+    <Compile Include="Models\Poly\IOC.cs" />
+    <Compile Include="Models\Poly\Kasiski.cs" />
     <Compile Include="ViewModels\FreqAnalysisVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\PolyAnalysisVM.cs" />
     <Compile Include="Views\Converters\InverseBooleanConverter.cs" />
     <Compile Include="Views\Pages\CardanPage.xaml.cs">
       <DependentUpon>CardanPage.xaml</DependentUpon>
@@ -111,6 +116,9 @@
     </Compile>
     <Compile Include="Views\Pages\MenuCiphersPage.xaml.cs">
       <DependentUpon>MenuCiphersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PolyAnalysisPage.xaml.cs">
+      <DependentUpon>PolyAnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tools\BoolToSizeConverter.cs" />
     <Page Include="Views\MainView.xaml">
@@ -138,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\MenuCiphersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PolyAnalysisPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

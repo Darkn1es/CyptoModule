@@ -37,7 +37,7 @@ namespace CyptoModule.Models
             {"Ш", 0.73}, {"Щ", 0.36}, {"Ъ", 0.04}, {"Ы", 1.90}, {"Ь", 1.74},
             {"Э", 0.32}, {"Ю", 0.64}, {"Я", 2.01}
         };
-        private readonly Dictionary<string, double> _engAlphabet = new Dictionary<string, double>() // Неправильные частоты
+        private readonly Dictionary<string, double> _engAlphabet = new Dictionary<string, double>()
         {
             {"A", 8.497}, {"B", 1.492}, {"C", 2.202}, {"D", 4.253}, {"E", 11.162},
             {"F", 2.228}, {"G", 2.015}, {"H", 6.094}, {"I", 7.546}, {"J", 0.153},
@@ -50,7 +50,6 @@ namespace CyptoModule.Models
         public Dictionary<string, double> CurrentAlphabet;
         public Dictionary<string, double> CurrentFreq;
         public Dictionary<string, string> ReplaceRule;
-        //private ObservableCollection<KeyPairClass> ReplaceRule;
 
         private Dictionary<string, List<int>> _lettersIndex;
         public FreqAnalysis()
@@ -88,15 +87,6 @@ namespace CyptoModule.Models
 
             return new KeyPairClass(key2, ReplaceRule[key2]);
 
-           /* var temp1 = ReplaceRule.First(t => t.Key == key);
-            int index1 = ReplaceRule.IndexOf(temp1);
-
-            var temp2 = ReplaceRule.First(t => t.Value == newValue);
-            int index2 = ReplaceRule.IndexOf(temp2);
-
-            string tempValue = temp1.Value;
-            ReplaceRule[index1].Value = newValue;
-            ReplaceRule[index2].Value = tempValue;*/
 
         }
 

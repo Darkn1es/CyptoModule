@@ -52,6 +52,7 @@ namespace CyptoModule.ViewModels
         private Page _keyTextPage;
         private Page _cardanoPage;
         private Page _freqPage;
+        private Page _polyPage;
 
         private Page _menuChiphersPage;
 
@@ -177,6 +178,7 @@ namespace CyptoModule.ViewModels
             _keyTextPage = new Views.Pages.KeyTextPage();
             _cardanoPage = new Views.Pages.CardanPage();
             _freqPage = new Views.Pages.FreqAnalysisPage();
+            _polyPage = new Views.Pages.PolyAnalysisPage();
             _menuChiphersPage = new Views.Pages.MenuCiphersPage();
 
             _keyTextPage.DataContext = this;
@@ -208,7 +210,7 @@ namespace CyptoModule.ViewModels
                 }
             });
 
-            DecryptCommand = new DelegateCommand(() => // (1,0)(2,1)(3,0)(3,2) // еитрП !мрив
+            DecryptCommand = new DelegateCommand(() =>
             {
                 try
                 {
@@ -287,6 +289,15 @@ namespace CyptoModule.ViewModels
                         }
                         outText = freqAnalysisVM.Text;
                     }
+                    else if (ChosenChipher == "Криптоанализ полиалфавитных шифров")
+                    {
+                        PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
+                        if (polyAnalysisVM.DecryptedText == "")
+                        {
+                            throw new Exception("Нет данных для сохранения");
+                        }
+                        outText = polyAnalysisVM.DecryptedText;
+                    }
                     else
                     {
                         if (OutputText == "")
@@ -327,6 +338,11 @@ namespace CyptoModule.ViewModels
                             {
                                 throw new Exception("Нельзя загрузить текст, пока ведется анализ");
                             }
+                        }
+                        else if (ChosenChipher == "Криптоанализ полиалфавитных шифров")
+                        {
+                            PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
+                            polyAnalysisVM.Text = File.ReadAllText(openFileDialog.FileName);
                         }
                         else
                         {
@@ -375,6 +391,10 @@ namespace CyptoModule.ViewModels
             if (pageName == "Частотный криптоанализ")
             {
                 CurrentPageContent = _freqPage;
+            }
+            else if (pageName == "Криптоанализ полиалфавитных шифров")
+            {
+                CurrentPageContent = _polyPage;
             }
 
         }

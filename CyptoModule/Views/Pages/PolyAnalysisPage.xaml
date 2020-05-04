@@ -1,0 +1,48 @@
+﻿<Page x:Class="CyptoModule.Views.Pages.PolyAnalysisPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CyptoModule.Views.Pages"
+      xmlns:viewmodels="clr-namespace:CyptoModule.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PolyAnalysisPage">
+    <Page.DataContext>
+        <viewmodels:PolyAnalysisVM/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,15"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+
+                <Label Content="Выберете язык"/>
+                <ComboBox SelectedValue="{Binding Language, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
+                    <ComboBoxItem Content="Русский"/>
+                    <ComboBoxItem Content="English"/>
+                </ComboBox>
+                <Label Content="Выберете метод"/>
+                <ComboBox SelectedValue="{Binding CurrentPolyAnalysis}" ItemsSource="{Binding Methods}" DisplayMemberPath="Name"/>
+                <Button Content="Начать анализ" Command="{Binding AnalysisCommand}"  Margin="10"/>
+                <Label Content="Преполагаемый размер ключа"/>
+                <TextBox Text="{Binding KeySize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <Label Content="Предполагаемый ключ"/>
+                <TextBox Text="{Binding Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Применить ключ" Command="{Binding DoVigenereCommand}" Margin="10"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding DecryptedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,15" IsReadOnly="True"/>
+        </Grid>
+    </Grid>
+</Page>
