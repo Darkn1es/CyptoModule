@@ -78,11 +78,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Auxiliary\Check.cs" />
     <Compile Include="Models\Auxiliary\KeyPairClass.cs" />
+    <Compile Include="Models\Auxiliary\KeyParameter.cs" />
+    <Compile Include="Models\Auxiliary\Pack.cs" />
     <Compile Include="Models\Ciphers\Alberti.cs" />
     <Compile Include="Models\Ciphers\Atbash.cs" />
     <Compile Include="Models\Ciphers\Caesar.cs" />
     <Compile Include="Models\Ciphers\Cardan.cs" />
+    <Compile Include="Models\Ciphers\DES.cs" />
     <Compile Include="Models\Ciphers\Gronsfeld.cs" />
     <Compile Include="Models\Ciphers\Hill.cs" />
     <Compile Include="Models\Ciphers\Playfair.cs" />
@@ -92,17 +96,30 @@
     <Compile Include="Models\Ciphers\Vernam.cs" />
     <Compile Include="Models\Ciphers\Vigenere.cs" />
     <Compile Include="Models\Ciphers\XORcipher.cs" />
+    <Compile Include="Models\ModerCipher\DesEngine.cs" />
     <Compile Include="Models\FreqAnalysis.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\Auxiliary\Matrix.cs" />
+    <Compile Include="Models\Interfaces\BufferedCipherBase.cs" />
     <Compile Include="Models\Interfaces\CipherAbstract.cs" />
+    <Compile Include="Models\Interfaces\IBlockCipher.cs" />
+    <Compile Include="Models\Interfaces\IBufferedCipher.cs" />
     <Compile Include="Models\Interfaces\ICipher.cs" />
+    <Compile Include="Models\Interfaces\ICipherFIle.cs" />
+    <Compile Include="Models\Interfaces\ICipherParameters.cs" />
+    <Compile Include="Models\Interfaces\IMode.cs" />
     <Compile Include="Models\Interfaces\PolyAnalysisAbstract.cs" />
+    <Compile Include="Models\ModerCipher\GOST28147Engine.cs" />
+    <Compile Include="Models\Modes\CBC.cs" />
+    <Compile Include="Models\Modes\CFB.cs" />
+    <Compile Include="Models\Modes\ECB.cs" />
+    <Compile Include="Models\Modes\OFB.cs" />
     <Compile Include="Models\Poly\Autocorrelation.cs" />
     <Compile Include="Models\Poly\IOC.cs" />
     <Compile Include="Models\Poly\Kasiski.cs" />
     <Compile Include="ViewModels\FreqAnalysisVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\ModernCipherVM.cs" />
     <Compile Include="ViewModels\PolyAnalysisVM.cs" />
     <Compile Include="Views\Converters\InverseBooleanConverter.cs" />
     <Compile Include="Views\Pages\CardanPage.xaml.cs">
@@ -116,6 +133,9 @@
     </Compile>
     <Compile Include="Views\Pages\MenuCiphersPage.xaml.cs">
       <DependentUpon>MenuCiphersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ModernCipherPage.xaml.cs">
+      <DependentUpon>ModernCipherPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PolyAnalysisPage.xaml.cs">
       <DependentUpon>PolyAnalysisPage.xaml</DependentUpon>
@@ -146,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\MenuCiphersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ModernCipherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

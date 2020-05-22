@@ -36,6 +36,7 @@
             <Button Content="Диск Альберти"/>
             <Button Content="Шифр Плейфера"/>
             <Button Content="Гаммирование"/>
+            <Button Content="DES"/>
         </StackPanel>
         
         <StackPanel Grid.Column="1" MinWidth="240">

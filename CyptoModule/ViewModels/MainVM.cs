@@ -53,6 +53,7 @@ namespace CyptoModule.ViewModels
         private Page _cardanoPage;
         private Page _freqPage;
         private Page _polyPage;
+        private Page _modernCipherPage;
 
         private Page _menuChiphersPage;
 
@@ -80,6 +81,16 @@ namespace CyptoModule.ViewModels
         }
         private bool _isVisibleKeyBox = false;
 
+        public bool IsVisibleBottom
+        {
+            get => _isVisibleBottom;
+            set
+            {
+                _isVisibleBottom = value;
+                RaisePropertyChanged(nameof(IsVisibleBottom));
+            }
+        }
+        private bool _isVisibleBottom = true;
 
         private CipherAbstract _currentCipher;
         public CipherAbstract CurrentCipher
@@ -168,6 +179,7 @@ namespace CyptoModule.ViewModels
             _ciphers.Add(new Hill());
             _ciphers.Add(new Vernam());
             _ciphers.Add(new XORcipher());
+            _ciphers.Add(new DES());
             #endregion
 
             Ciphers = new ReadOnlyObservableCollection<CipherAbstract>(_ciphers);
@@ -179,6 +191,7 @@ namespace CyptoModule.ViewModels
             _cardanoPage = new Views.Pages.CardanPage();
             _freqPage = new Views.Pages.FreqAnalysisPage();
             _polyPage = new Views.Pages.PolyAnalysisPage();
+            _modernCipherPage = new Views.Pages.ModernCipherPage();
             _menuChiphersPage = new Views.Pages.MenuCiphersPage();
 
             _keyTextPage.DataContext = this;
@@ -367,11 +380,18 @@ namespace CyptoModule.ViewModels
             InputText = "";
             OutputText = "";
             ChosenChipher = CurrentCipher.CipherName;
+            IsVisibleBottom = true;
 
             if ((CurrentCipher.CipherName == "Шифр Кардано") ||
                 (CurrentCipher.CipherName == "Гаммирование"))
             {
                 CurrentPageContent = _cardanoPage;
+            }
+            else if(CurrentCipher.CipherName == "DES")
+            {
+                IsVisibleBottom = false;
+                CurrentPageContent = _modernCipherPage;
+                ( (ModernCipherVM)_modernCipherPage.DataContext ).Cipher = CurrentCipher;
             }
             else
             {
