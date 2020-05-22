@@ -19,14 +19,6 @@ namespace CyptoModule.Models.DES
             return workingKey;
         }
 
-        /**
-        * initialise a DES cipher.
-        *
-        * @param forEncryption whether or not we are for encryption.
-        * @param parameters the parameters required to set up the cipher.
-        * @exception ArgumentException if the parameters argument is
-        * inappropriate.
-        */
         public void Init(
             bool forEncryption,
             ICipherParameters parameters)
@@ -93,9 +85,7 @@ namespace CyptoModule.Models.DES
             0x8,        0x4,        0x2,        0x1
         };
 
-        /*
-        * Use the key schedule specified in the Standard (ANSI X3.92-1981).
-        */
+
         private readonly byte[] pc1 =
         {
             56, 48, 40, 32, 24, 16,  8,   0, 57, 49, 41, 33, 25, 17,
@@ -278,13 +268,6 @@ namespace CyptoModule.Models.DES
             0x00001040, 0x00040040, 0x10000000, 0x10041000
         };
 
-        /**
-        * Generate an integer based working key based on our secret key
-        * and what we processing we are planning to do.
-        *
-        * Acknowledgements for this routine go to James Gillogly and Phil Karn.
-        *         (whoever, and wherever they are!).
-        */
         private int[] GenerateWorkingKey(
             bool encrypting,
             byte[] key)
@@ -356,9 +339,7 @@ namespace CyptoModule.Models.DES
                 }
             }
 
-            //
-            // store the processed key
-            //
+
             for (int i = 0; i != 32; i += 2)
             {
                 int i1, i2;
@@ -380,9 +361,7 @@ namespace CyptoModule.Models.DES
             return newKey;
         }
 
-        /**
-        * the DES engine.
-        */
+
         private void DesFunc(
             int[] wKey,
             byte[] input,
