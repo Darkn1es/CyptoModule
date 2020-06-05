@@ -18,11 +18,20 @@ namespace CyptoModule.Models.Modes
         {
             set
             {
-                if (value.Length != _cipher.GetBlockSize())
+                if (value.Length < _cipher.GetBlockSize())
                 {
                     throw new Exception("Неправильный вектор инициализации");
                 }
-                _iv = value;
+                else if ( value.Length > _cipher.GetBlockSize() )
+                {
+                    byte[] temp = new byte[ _cipher.GetBlockSize() ];
+                    Array.Copy( value, 0, temp, 0, _cipher.GetBlockSize() );
+                    _iv = temp;
+                }
+                else
+                {
+                    _iv = value;
+                }
             }
         }
 

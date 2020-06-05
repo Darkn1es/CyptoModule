@@ -87,6 +87,7 @@
     <Compile Include="Models\Ciphers\Caesar.cs" />
     <Compile Include="Models\Ciphers\Cardan.cs" />
     <Compile Include="Models\Ciphers\DES.cs" />
+    <Compile Include="Models\Ciphers\GOST28147.cs" />
     <Compile Include="Models\Ciphers\Gronsfeld.cs" />
     <Compile Include="Models\Ciphers\Hill.cs" />
     <Compile Include="Models\Ciphers\Playfair.cs" />

@@ -31,7 +31,7 @@ namespace CyptoModule.ViewModels
             private set
             {
                 _currentPageContent = value;
-                RaisePropertyChanged(nameof(CurrentPageContent));
+                RaisePropertyChanged( nameof( CurrentPageContent ) );
             }
         }
         private Page _currentMenuPageContent;
@@ -44,7 +44,7 @@ namespace CyptoModule.ViewModels
             private set
             {
                 _currentMenuPageContent = value;
-                RaisePropertyChanged(nameof(CurrentMenuPageContent));
+                RaisePropertyChanged( nameof( CurrentMenuPageContent ) );
             }
         }
 
@@ -66,17 +66,17 @@ namespace CyptoModule.ViewModels
             set
             {
                 _chosenChipher = value;
-                RaisePropertyChanged(nameof(ChosenChipher));
+                RaisePropertyChanged( nameof( ChosenChipher ) );
             }
         }
 
-        public bool IsVisibleKeyBox 
-        { 
+        public bool IsVisibleKeyBox
+        {
             get => _isVisibleKeyBox;
             set
             {
                 _isVisibleKeyBox = value;
-                RaisePropertyChanged(nameof(IsVisibleKeyBox));
+                RaisePropertyChanged( nameof( IsVisibleKeyBox ) );
             }
         }
         private bool _isVisibleKeyBox = false;
@@ -87,7 +87,7 @@ namespace CyptoModule.ViewModels
             set
             {
                 _isVisibleBottom = value;
-                RaisePropertyChanged(nameof(IsVisibleBottom));
+                RaisePropertyChanged( nameof( IsVisibleBottom ) );
             }
         }
         private bool _isVisibleBottom = true;
@@ -114,7 +114,7 @@ namespace CyptoModule.ViewModels
             set
             {
                 _inputText = value;
-                RaisePropertyChanged(nameof(InputText));
+                RaisePropertyChanged( nameof( InputText ) );
             }
         }
 
@@ -125,7 +125,7 @@ namespace CyptoModule.ViewModels
             set
             {
                 _outputText = value;
-                RaisePropertyChanged(nameof(OutputText));
+                RaisePropertyChanged( nameof( OutputText ) );
             }
         }
 
@@ -136,7 +136,7 @@ namespace CyptoModule.ViewModels
             set
             {
                 _keyText = value;
-                RaisePropertyChanged(nameof(KeyText));
+                RaisePropertyChanged( nameof( KeyText ) );
             }
         }
 
@@ -147,7 +147,7 @@ namespace CyptoModule.ViewModels
             set
             {
                 _keySizeText = value;
-                RaisePropertyChanged(nameof(KeySizeText));
+                RaisePropertyChanged( nameof( KeySizeText ) );
             }
         }
 
@@ -166,25 +166,26 @@ namespace CyptoModule.ViewModels
         public MainVM()
         {
             #region Init ciphers
-            _ciphers.Add(new Atbash());
-            _ciphers.Add(new Caesar());
-            _ciphers.Add(new Scytale());
-            _ciphers.Add(new Polybius());
-            _ciphers.Add(new Cardan());
-            _ciphers.Add(new Richelieu());
-            _ciphers.Add(new Alberti());
-            _ciphers.Add(new Gronsfeld());
-            _ciphers.Add(new Vigenere());
-            _ciphers.Add(new Playfair());
-            _ciphers.Add(new Hill());
-            _ciphers.Add(new Vernam());
-            _ciphers.Add(new XORcipher());
-            _ciphers.Add(new DES());
+            _ciphers.Add( new Atbash() );
+            _ciphers.Add( new Caesar() );
+            _ciphers.Add( new Scytale() );
+            _ciphers.Add( new Polybius() );
+            _ciphers.Add( new Cardan() );
+            _ciphers.Add( new Richelieu() );
+            _ciphers.Add( new Alberti() );
+            _ciphers.Add( new Gronsfeld() );
+            _ciphers.Add( new Vigenere() );
+            _ciphers.Add( new Playfair() );
+            _ciphers.Add( new Hill() );
+            _ciphers.Add( new Vernam() );
+            _ciphers.Add( new XORcipher() );
+            _ciphers.Add( new DES() );
+            _ciphers.Add( new GOST28147() );
             #endregion
 
-            Ciphers = new ReadOnlyObservableCollection<CipherAbstract>(_ciphers);
+            Ciphers = new ReadOnlyObservableCollection<CipherAbstract>( _ciphers );
 
-            CurrentCipher = Ciphers[0];
+            CurrentCipher = Ciphers[ 0 ];
 
 
             _keyTextPage = new Views.Pages.KeyTextPage();
@@ -202,172 +203,172 @@ namespace CyptoModule.ViewModels
             CurrentMenuPageContent = _menuChiphersPage;
 
 
-            EncryptCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    if (InputText == "")
-                    {
-                        throw new Exception("Входной текст не должен быть пустым.");
-                    }
-                    OutputText = CurrentCipher.Encrypt(InputText, KeyText);
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    MessageBox.Show("Неверный формат ключа");
-                }
-                catch (Exception error)
-                {
-                    // Прости MVVM
-                    MessageBox.Show(error.Message);
-                }
-            });
+            EncryptCommand = new DelegateCommand( () =>
+             {
+                 try
+                 {
+                     if ( InputText == "" )
+                     {
+                         throw new Exception( "Входной текст не должен быть пустым." );
+                     }
+                     OutputText = CurrentCipher.Encrypt( InputText, KeyText );
+                 }
+                 catch ( IndexOutOfRangeException )
+                 {
+                     MessageBox.Show( "Неверный формат ключа" );
+                 }
+                 catch ( Exception error )
+                 {
+                     // Прости MVVM
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
-            DecryptCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    if (InputText == "")
-                    {
-                        throw new Exception("Входной текст не должен быть пустым.");
-                    }
-                    OutputText = CurrentCipher.Decrypt(InputText, KeyText);
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    MessageBox.Show("Неверный формат ключа");
-                }
-                catch (Exception error)
-                {
-                    // Прости MVVM x2
-                    MessageBox.Show(error.Message);
-                }
-            });
+            DecryptCommand = new DelegateCommand( () =>
+             {
+                 try
+                 {
+                     if ( InputText == "" )
+                     {
+                         throw new Exception( "Входной текст не должен быть пустым." );
+                     }
+                     OutputText = CurrentCipher.Decrypt( InputText, KeyText );
+                 }
+                 catch ( IndexOutOfRangeException )
+                 {
+                     MessageBox.Show( "Неверный формат ключа" );
+                 }
+                 catch ( Exception error )
+                 {
+                     // Прости MVVM x2
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
-            GenerateCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    if (KeySizeText == "")
-                    {
-                        throw new Exception("Размер ключа не должен быть пустым.");
-                    }
-                    KeyText = CurrentCipher.GenerateKey(KeySizeText);
-                }
-                catch (Exception error)
-                {
-                    // Прости MVVM x3
-                    MessageBox.Show(error.Message);
-                }
-            });
+            GenerateCommand = new DelegateCommand( () =>
+             {
+                 try
+                 {
+                     if ( KeySizeText == "" )
+                     {
+                         throw new Exception( "Размер ключа не должен быть пустым." );
+                     }
+                     KeyText = CurrentCipher.GenerateKey( KeySizeText );
+                 }
+                 catch ( Exception error )
+                 {
+                     // Прости MVVM x3
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
-            ChangeCipherCommand = new DelegateCommand<string>((string cipherName) =>
-            {
-                try
-                {
-                    bool chosen = false;
-                    foreach (var cipher in Ciphers)
-                    {
-                        if (cipher.CipherName == cipherName)
-                        {
-                            CurrentCipher = cipher;
-                            chosen = true;
-                            break;
-                        }
-                    }
-                    if (!chosen)
-                    {
-                        UpdateWindow(cipherName);
-                    }
+            ChangeCipherCommand = new DelegateCommand<string>( ( string cipherName ) =>
+             {
+                 try
+                 {
+                     bool chosen = false;
+                     foreach ( var cipher in Ciphers )
+                     {
+                         if ( cipher.CipherName == cipherName )
+                         {
+                             CurrentCipher = cipher;
+                             chosen = true;
+                             break;
+                         }
+                     }
+                     if ( !chosen )
+                     {
+                         UpdateWindow( cipherName );
+                     }
 
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                }
-            });
+                 }
+                 catch ( Exception error )
+                 {
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
-            SaveToFileCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    string outText = "";
-                    if (ChosenChipher == "Частотный криптоанализ")
-                    {
-                        FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
+            SaveToFileCommand = new DelegateCommand( () =>
+             {
+                 try
+                 {
+                     string outText = "";
+                     if ( ChosenChipher == "Частотный криптоанализ" )
+                     {
+                         FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
 
-                        if (freqAnalysisVM.Text == "")
-                        {
-                            throw new Exception("Нет данных для сохранения");
-                        }
-                        outText = freqAnalysisVM.Text;
-                    }
-                    else if (ChosenChipher == "Криптоанализ полиалфавитных шифров")
-                    {
-                        PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
-                        if (polyAnalysisVM.DecryptedText == "")
-                        {
-                            throw new Exception("Нет данных для сохранения");
-                        }
-                        outText = polyAnalysisVM.DecryptedText;
-                    }
-                    else
-                    {
-                        if (OutputText == "")
-                        {
-                            throw new Exception("Нет данных для сохранения");
-                        }
-                        outText = OutputText;
-                    }
+                         if ( freqAnalysisVM.Text == "" )
+                         {
+                             throw new Exception( "Нет данных для сохранения" );
+                         }
+                         outText = freqAnalysisVM.Text;
+                     }
+                     else if ( ChosenChipher == "Криптоанализ полиалфавитных шифров" )
+                     {
+                         PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
+                         if ( polyAnalysisVM.DecryptedText == "" )
+                         {
+                             throw new Exception( "Нет данных для сохранения" );
+                         }
+                         outText = polyAnalysisVM.DecryptedText;
+                     }
+                     else
+                     {
+                         if ( OutputText == "" )
+                         {
+                             throw new Exception( "Нет данных для сохранения" );
+                         }
+                         outText = OutputText;
+                     }
 
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        File.WriteAllText(saveFileDialog.FileName, outText);
-                        MessageBox.Show("Результат успешно сохранен в файл");
-                    }
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                }
-            });
+                     SaveFileDialog saveFileDialog = new SaveFileDialog();
+                     if ( saveFileDialog.ShowDialog() == true )
+                     {
+                         File.WriteAllText( saveFileDialog.FileName, outText );
+                         MessageBox.Show( "Результат успешно сохранен в файл" );
+                     }
+                 }
+                 catch ( Exception error )
+                 {
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
-            ReadFromFileCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    if (openFileDialog.ShowDialog() == true)
-                    {
-                        if (ChosenChipher == "Частотный криптоанализ")
-                        {
-                            FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
-                            if (freqAnalysisVM.IsFixed == false)
-                            {
-                                freqAnalysisVM.Text = File.ReadAllText(openFileDialog.FileName);
-                            }
-                            else
-                            {
-                                throw new Exception("Нельзя загрузить текст, пока ведется анализ");
-                            }
-                        }
-                        else if (ChosenChipher == "Криптоанализ полиалфавитных шифров")
-                        {
-                            PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
-                            polyAnalysisVM.Text = File.ReadAllText(openFileDialog.FileName);
-                        }
-                        else
-                        {
-                            InputText = File.ReadAllText(openFileDialog.FileName);
-                        }
-                    }
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                }
-            });
+            ReadFromFileCommand = new DelegateCommand( () =>
+             {
+                 try
+                 {
+                     OpenFileDialog openFileDialog = new OpenFileDialog();
+                     if ( openFileDialog.ShowDialog() == true )
+                     {
+                         if ( ChosenChipher == "Частотный криптоанализ" )
+                         {
+                             FreqAnalysisVM freqAnalysisVM = _freqPage.DataContext as FreqAnalysisVM;
+                             if ( freqAnalysisVM.IsFixed == false )
+                             {
+                                 freqAnalysisVM.Text = File.ReadAllText( openFileDialog.FileName );
+                             }
+                             else
+                             {
+                                 throw new Exception( "Нельзя загрузить текст, пока ведется анализ" );
+                             }
+                         }
+                         else if ( ChosenChipher == "Криптоанализ полиалфавитных шифров" )
+                         {
+                             PolyAnalysisVM polyAnalysisVM = _polyPage.DataContext as PolyAnalysisVM;
+                             polyAnalysisVM.Text = File.ReadAllText( openFileDialog.FileName );
+                         }
+                         else
+                         {
+                             InputText = File.ReadAllText( openFileDialog.FileName );
+                         }
+                     }
+                 }
+                 catch ( Exception error )
+                 {
+                     MessageBox.Show( error.Message );
+                 }
+             } );
 
 
 
@@ -382,12 +383,12 @@ namespace CyptoModule.ViewModels
             ChosenChipher = CurrentCipher.CipherName;
             IsVisibleBottom = true;
 
-            if ((CurrentCipher.CipherName == "Шифр Кардано") ||
-                (CurrentCipher.CipherName == "Гаммирование"))
+            if ( ( CurrentCipher.CipherName == "Шифр Кардано" ) ||
+                ( CurrentCipher.CipherName == "Гаммирование" ) )
             {
                 CurrentPageContent = _cardanoPage;
             }
-            else if(CurrentCipher.CipherName == "DES")
+            else if ( ( CurrentCipher.CipherName == "DES" ) || ( CurrentCipher.CipherName == "ГОСТ28147" ) )
             {
                 IsVisibleBottom = false;
                 CurrentPageContent = _modernCipherPage;
@@ -400,7 +401,7 @@ namespace CyptoModule.ViewModels
 
         }
 
-        private void UpdateWindow(string pageName)
+        private void UpdateWindow( string pageName )
         {
             IsVisibleKeyBox = false;
             KeyText = "";
@@ -408,11 +409,11 @@ namespace CyptoModule.ViewModels
             OutputText = "";
             ChosenChipher = pageName;
 
-            if (pageName == "Частотный криптоанализ")
+            if ( pageName == "Частотный криптоанализ" )
             {
                 CurrentPageContent = _freqPage;
             }
-            else if (pageName == "Криптоанализ полиалфавитных шифров")
+            else if ( pageName == "Криптоанализ полиалфавитных шифров" )
             {
                 CurrentPageContent = _polyPage;
             }

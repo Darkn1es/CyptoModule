@@ -31,9 +31,30 @@ namespace CyptoModule.ViewModels
                     Modes.Add( "CFB" );
                     Modes.Add( "OFB" );
                     SelectedMode = "ECB";
+                    KeySize = 8;
+                }
+                else if ( _cipher.CipherName == "ГОСТ28147" )
+                {
+                    Modes.Clear();
+                    Modes.Add( "ECB" );
+                    Modes.Add( "CFB" );
+                    SelectedMode = "ECB";
+                    KeySize = 32;
                 }
             }
         }
+
+        private int _keySize = 8;
+        public int KeySize 
+        {
+            get => _keySize;
+            private set
+            {
+                _keySize = value;
+                RaisePropertyChanged( nameof( KeySize ) );
+            }
+        }
+
         private string _selectedMode = "ECB";
         public string SelectedMode
         {
@@ -254,7 +275,7 @@ namespace CyptoModule.ViewModels
                 }
                 catch ( Exception )
                 {
-                    MessageBox.Show( "Некоректные данные. Проверьте ключ и текст. Ключ должен состоять из 8 символов" );
+                    MessageBox.Show( "Некоректные данные. Проверьте ключ и текст. Ключ должен состоять из " + KeySize.ToString() + " символов" );
                 }
 
             } );
@@ -310,7 +331,7 @@ namespace CyptoModule.ViewModels
                 }
                 catch ( Exception )
                 {
-                    MessageBox.Show( "Некоректные данные. Проверьте ключ и текст. Ключ должен состоять из 8 символов" );
+                    MessageBox.Show( "Некоректные данные. Проверьте ключ и текст. Ключ должен состоять из " + KeySize.ToString() + " символов" );
                 }
             } );
             OpenFileCommand = new DelegateCommand( () =>
@@ -383,7 +404,8 @@ namespace CyptoModule.ViewModels
                 }
                 catch ( Exception )
                 {
-                    MessageBox.Show( "Ошибка в ключе либо в файле. Ключ должен состоять из 8 символов" );
+                    MessageBox.Show( "Ошибка в ключе либо в файле. Ключ должен состоять из " + KeySize.ToString() + " символов" );
+
                 }
             } );
 
@@ -411,7 +433,7 @@ namespace CyptoModule.ViewModels
                 }
                 catch ( Exception )
                 {
-                    MessageBox.Show( "Ошибка в ключе либо в файле. Ключ должен состоять из 8 символов" );
+                    MessageBox.Show( "Ошибка в ключе либо в файле. Ключ должен состоять из " + KeySize.ToString() + " символов" );
                 }
             } );
         }
@@ -476,9 +498,9 @@ namespace CyptoModule.ViewModels
 
         private void ValidateKey(string key)
         {
-            if ( key.Length != 8 )
+            if ( key.Length != KeySize )
             {
-                throw new Exception( "Ключ должен состоять из 8 символов." );
+                throw new Exception( "Ключ должен состоять из " + KeySize.ToString() + " символов." );
             }
         }
 

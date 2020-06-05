@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Height="45">
-            <TextBox Margin="20,10" Text="{Binding KeyText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" MaxLength="8">
+            <TextBox Margin="20,10" Text="{Binding KeyText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" MaxLength="{Binding KeySize}">
                 <TextBox.Style>
                     <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                         <Style.Resources>

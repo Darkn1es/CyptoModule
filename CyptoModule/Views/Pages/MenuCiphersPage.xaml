@@ -50,6 +50,7 @@
             <Button Content="Шифр Гронсфельда"/>
             <Button Content="Криптосистема Хилла"/>
             <Button Content="Частотный криптоанализ"/>
+            <Button Content="ГОСТ28147"/>
 
 
         </StackPanel>
